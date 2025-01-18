@@ -22,12 +22,18 @@ int main() {
 
     std::sort(left.begin(), left.end());
     std::sort(right.begin(), right.end());
+
     int sum = 0;
     for (int i = 0; i < left.size(); i++) {
         sum += std::abs(left[i] - right[i]);
     }
-
     std::cout << "Part 1: " << sum << "\n";
+
+    sum = 0;
+    for (int i = 0; i < left.size(); i++) {
+        sum += std::abs(left[i] * std::count(right.begin(), right.end(), left[i]));
+    }
+    std::cout << "Part 2: " << sum << "\n";
 
     file.close();
 
