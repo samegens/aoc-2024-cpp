@@ -4,18 +4,23 @@
 #include <vector>
 #include <string>
 
-class Report {
+class Report
+{
 public:
-    Report(const std::vector<int>& levels);
+    static Report Parse(const std::string &text);
+
+    Report(const std::vector<int> &levels);
     ~Report();
 
-    const std::vector<int>& GetLevels() const { return levels_; }
+    const std::vector<int> &GetLevels() const { return levels_; }
 
-    static Report Parse(const std::string& text);
+    bool IsSafe() const;
 
 private:
-    static void ValidateInput(const std::string& text);
-    static std::vector<int> ParseLevels(const std::string& text);
+    static void ValidateInput(const std::string &text);
+    static std::vector<int> ParseLevels(const std::string &text);
+
+    bool IsAllowedDiff(int diff) const;
 
     std::vector<int> levels_;
 };
