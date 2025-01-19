@@ -44,6 +44,20 @@ bool ReportChecker::IsSafe(const Report &report) const
     return increasing || decreasing;
 }
 
+bool ReportChecker::IsSafeWithLevelRemoved(const Report &report) const
+{
+    for (int i = 0; i < report.GetLevels().size(); i++)
+    {
+        Report new_report = report.RemoveLevel(i);
+        if (IsSafe(new_report))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool ReportChecker::IsAllowedDiff(int diff) const
 {
     return std::abs(diff) >= 1 && std::abs(diff) <= 3;

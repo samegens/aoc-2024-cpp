@@ -13,6 +13,11 @@ public:
 
     const std::vector<int> &GetLevels() const { return levels_; }
 
+    /// @brief Create a new Report without the element at the specified index.
+    /// @param index 
+    /// @return The new report
+    Report RemoveLevel(size_t index) const;
+
 private:
     std::vector<int> levels_;
 };

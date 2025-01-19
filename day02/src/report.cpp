@@ -9,3 +9,16 @@ Report::Report(const std::vector<int> &levels)
 Report::~Report()
 {
 }
+
+Report Report::RemoveLevel(size_t index) const
+{
+    if (index >= levels_.size())
+    {
+        throw std::out_of_range("Index out of range");
+    }
+
+    std::vector<int> new_levels(levels_);
+    new_levels.erase(new_levels.begin() + index);
+
+    return Report(new_levels);
+}

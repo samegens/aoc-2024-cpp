@@ -20,6 +20,7 @@ int main()
     std::string input = ReadAllTextFromPath("input.txt");
     Solver solver(input);
     std::cout << "Part 1: " << solver.SolvePart1() << std::endl;
+    std::cout << "Part 2: " << solver.SolvePart2() << std::endl;
 
     return 0;
 }

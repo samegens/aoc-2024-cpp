@@ -28,7 +28,16 @@ int Solver::SolvePart1()
 
 int Solver::SolvePart2()
 {
-    return 0;
+    ReportChecker report_checker;
+    int count = 0;
+    for (const auto& report: reports_)
+    {
+        if (report_checker.IsSafe(report) || report_checker.IsSafeWithLevelRemoved(report))
+        {
+            count++;
+        }
+    }
+    return count;
 }
 
 std::vector<Report> Solver::ParseReports(const std::string &input, const ReportParser &report_parser)

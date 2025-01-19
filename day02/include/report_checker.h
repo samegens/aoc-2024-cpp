@@ -14,6 +14,11 @@ public:
     /// @param report 
     /// @return true when the report is safe.
     bool IsSafe(const Report& report) const;
+
+    /// @brief Checks if a report is safe when one level is removed from the report. 
+    /// @param report 
+    /// @return true when the report is safe with one level removed.
+    bool IsSafeWithLevelRemoved(const Report& report) const;
     
 private:
     bool IsAllowedDiff(int diff) const;
