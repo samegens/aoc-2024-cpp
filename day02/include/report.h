@@ -7,8 +7,6 @@
 class Report
 {
 public:
-    static Report Parse(const std::string &text);
-
     Report(const std::vector<int> &levels);
     ~Report();
 
@@ -17,9 +15,6 @@ public:
     bool IsSafe() const;
 
 private:
-    static void ValidateInput(const std::string &text);
-    static std::vector<int> ParseLevels(const std::string &text);
-
     bool IsAllowedDiff(int diff) const;
 
     std::vector<int> levels_;
