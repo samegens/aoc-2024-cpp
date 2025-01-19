@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+/// @brief Report stores a report (a list of levels).
 class Report
 {
 public:
@@ -12,11 +13,7 @@ public:
 
     const std::vector<int> &GetLevels() const { return levels_; }
 
-    bool IsSafe() const;
-
 private:
-    bool IsAllowedDiff(int diff) const;
-
     std::vector<int> levels_;
 };
 

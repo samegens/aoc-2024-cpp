@@ -9,12 +9,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(SHARED_SOURCES
     src/report.cpp
     src/report_parser.cpp
+    src/report_checker.cpp
 )
 
 # Test source files
 set(TEST_SOURCES
     test/report_test.cpp
     test/report_parser_test.cpp
+    test/report_checker_test.cpp
 )
 
 # Add the executable
