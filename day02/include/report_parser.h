@@ -9,11 +9,11 @@ public:
     ReportParser();
     ~ReportParser();
 
-    Report Parse(const std::string& text);
+    Report Parse(const std::string& text) const;
 
 private:
-    void ValidateInput(const std::string &text);
-    std::vector<int> ParseLevels(const std::string &text);
+    void ValidateInput(const std::string &text) const;
+    std::vector<int> ParseLevels(const std::string &text) const;
 };
 
 #endif // REPORTS_PARSER_H

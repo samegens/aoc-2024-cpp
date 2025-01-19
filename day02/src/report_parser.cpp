@@ -10,14 +10,14 @@ ReportParser::~ReportParser()
 {
 }
 
-Report ReportParser::Parse(const std::string &text)
+Report ReportParser::Parse(const std::string &text) const
 {
     ValidateInput(text);
     std::vector<int> levels = ParseLevels(text);
     return Report(levels);
 }
 
-void ReportParser::ValidateInput(const std::string &text)
+void ReportParser::ValidateInput(const std::string &text) const
 {
     if (text.empty())
     {
@@ -25,7 +25,7 @@ void ReportParser::ValidateInput(const std::string &text)
     }
 }
 
-std::vector<int> ReportParser::ParseLevels(const std::string &text)
+std::vector<int> ReportParser::ParseLevels(const std::string &text) const
 {
     std::vector<int> levels;
     std::istringstream stream(text);
