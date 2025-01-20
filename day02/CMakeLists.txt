@@ -13,7 +13,7 @@ set(SHARED_SOURCES
     src/solver.cpp
 )
 
-# Test source files
+# Unit test source files
 set(UNIT_TEST_SOURCES
     test/unit/report_test.cpp
     test/unit/report_parser_test.cpp
@@ -21,7 +21,12 @@ set(UNIT_TEST_SOURCES
     test/unit/solver_test.cpp
 )
 
-# Add the executable
+# Integration test source files
+set(INTEGRATION_TEST_SOURCES
+    test/integration/solver_test.cpp
+)
+
+# Add the main executable
 add_executable(solver src/main.cpp ${SHARED_SOURCES})
 
 # Include directories for headers
@@ -31,11 +36,17 @@ include_directories(include)
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-# Add the test executable
-add_executable(solver_test ${UNIT_TEST_SOURCES} ${SHARED_SOURCES})
+# Add the unit test executable
+add_executable(unit_tests ${UNIT_TEST_SOURCES} ${SHARED_SOURCES})
 
-# Link Google Test libraries to the test executable
-target_link_libraries(solver_test GTest::GTest GTest::Main pthread gmock gmock_main)
+# Link Google Test libraries to the unit test executable
+target_link_libraries(unit_tests GTest::GTest GTest::Main pthread gmock gmock_main)
+
+# Add the integration test executable
+add_executable(integration_tests ${INTEGRATION_TEST_SOURCES} ${SHARED_SOURCES})
+
+# Link Google Test libraries to the integration test executable
+target_link_libraries(integration_tests GTest::GTest GTest::Main pthread)
 
 # Enable debug
 set(CMAKE_BUILD_TYPE Debug)
