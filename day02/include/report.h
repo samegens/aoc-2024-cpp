@@ -18,6 +18,11 @@ public:
     /// @return The new report
     Report RemoveLevel(size_t index) const;
 
+    /// @brief Equality operator
+    /// @param other 
+    /// @return true of this report equals the passed report
+    bool operator==(const Report& other) const;
+
 private:
     std::vector<int> levels_;
 };

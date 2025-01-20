@@ -2,10 +2,9 @@
 #include <sstream>
 #include "report_checker.h"
 
-Solver::Solver(const std::string &input)
+Solver::Solver(const std::string &input, const IReportParser &parser, const IReportChecker &checker)
+    : parser_(parser), checker_(checker), reports_(ParseReports(input, parser))
 {
-    ReportParser report_parser;
-    reports_ = ParseReports(input, report_parser);
 }
 
 Solver::~Solver()
@@ -14,11 +13,10 @@ Solver::~Solver()
 
 int Solver::SolvePart1()
 {
-    ReportChecker report_checker;
     int count = 0;
     for (const auto& report: reports_)
     {
-        if (report_checker.IsSafe(report))
+        if (checker_.IsSafe(report))
         {
             count++;
         }
@@ -28,11 +26,10 @@ int Solver::SolvePart1()
 
 int Solver::SolvePart2()
 {
-    ReportChecker report_checker;
     int count = 0;
     for (const auto& report: reports_)
     {
-        if (report_checker.IsSafe(report) || report_checker.IsSafeWithLevelRemoved(report))
+        if (checker_.IsSafe(report) || checker_.IsSafeWithLevelRemoved(report))
         {
             count++;
         }
@@ -40,7 +37,7 @@ int Solver::SolvePart2()
     return count;
 }
 
-std::vector<Report> Solver::ParseReports(const std::string &input, const ReportParser &report_parser)
+std::vector<Report> Solver::ParseReports(const std::string &input, const IReportParser &report_parser)
 {
     std::istringstream stream(input);
     std::string line;

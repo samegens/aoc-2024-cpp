@@ -22,3 +22,8 @@ Report Report::RemoveLevel(size_t index) const
 
     return Report(new_levels);
 }
+
+bool Report::operator==(const Report &other) const
+{
+    return levels_ == other.levels_;
+}

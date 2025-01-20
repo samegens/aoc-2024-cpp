@@ -52,7 +52,8 @@ TEST(ReportTest, EmptyReport)
     EXPECT_EQ(report.GetLevels().size(), 0);
 }
 
-TEST(ReportTest, RemoveLevel_ValidIndex) {
+TEST(ReportTest, RemoveLevel_ValidIndex)
+{
     // Arrange
     Report report({1, 2, 3, 4, 5});
 
@@ -65,7 +66,8 @@ TEST(ReportTest, RemoveLevel_ValidIndex) {
     EXPECT_EQ(report.GetLevels(), std::vector<int>({1, 2, 3, 4, 5}));
 }
 
-TEST(ReportTest, RemoveLevel_FirstIndex) {
+TEST(ReportTest, RemoveLevel_FirstIndex)
+{
     // Arrange
     Report report({1, 2, 3, 4, 5});
 
@@ -76,7 +78,8 @@ TEST(ReportTest, RemoveLevel_FirstIndex) {
     EXPECT_EQ(new_report.GetLevels(), std::vector<int>({2, 3, 4, 5}));
 }
 
-TEST(ReportTest, RemoveLevel_LastIndex) {
+TEST(ReportTest, RemoveLevel_LastIndex)
+{
     // Arrange
     Report report({1, 2, 3, 4, 5});
 
@@ -87,7 +90,8 @@ TEST(ReportTest, RemoveLevel_LastIndex) {
     EXPECT_EQ(new_report.GetLevels(), std::vector<int>({1, 2, 3, 4}));
 }
 
-TEST(ReportTest, RemoveLevel_SingleElement) {
+TEST(ReportTest, RemoveLevel_SingleElement)
+{
     // Arrange
     Report report({42});
 
@@ -98,7 +102,8 @@ TEST(ReportTest, RemoveLevel_SingleElement) {
     EXPECT_EQ(new_report.GetLevels(), std::vector<int>());
 }
 
-TEST(ReportTest, RemoveLevel_EmptyReport) {
+TEST(ReportTest, RemoveLevel_EmptyReport)
+{
     // Arrange
     Report report({});
 
@@ -106,7 +111,8 @@ TEST(ReportTest, RemoveLevel_EmptyReport) {
     EXPECT_THROW(report.RemoveLevel(0), std::out_of_range);
 }
 
-TEST(ReportTest, RemoveLevel_IndexOutOfRange) {
+TEST(ReportTest, RemoveLevel_IndexOutOfRange)
+{
     // Arrange
     Report report({1, 2, 3, 4, 5});
 
@@ -114,4 +120,68 @@ TEST(ReportTest, RemoveLevel_IndexOutOfRange) {
     EXPECT_THROW(report.RemoveLevel(5), std::out_of_range);
     EXPECT_THROW(report.RemoveLevel(100), std::out_of_range);
     EXPECT_THROW(report.RemoveLevel(-1), std::out_of_range);
+}
+
+TEST(ReportTest, Equals_EqualReports)
+{
+    // Arrange
+    Report report1({1, 2, 3, 4, 5});
+    Report report2({1, 2, 3, 4, 5});
+
+    // Act
+    bool result = (report1 == report2);
+
+    // Assert
+    EXPECT_TRUE(result);
+}
+
+TEST(ReportTest, Equals_DifferentLengths)
+{
+    // Arrange
+    Report report1({1, 2, 3, 4, 5});
+    Report report2({1, 2, 3, 4});
+
+    // Act
+    bool result = (report1 == report2);
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
+TEST(ReportTest, Equals_DifferentElements)
+{
+    // Arrange
+    Report report1({1, 2, 3, 4, 5});
+    Report report2({5, 4, 3, 2, 1});
+
+    // Act
+    bool result = (report1 == report2);
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
+TEST(ReportTest, Equals_EmptyReports)
+{
+    // Arrange
+    Report report1({});
+    Report report2({});
+
+    // Act
+    bool result = (report1 == report2);
+
+    // Assert
+    EXPECT_TRUE(result);
+}
+
+TEST(ReportTest, Equality_SameObject)
+{
+    // Arrange
+    Report report({1, 2, 3});
+
+    // Act
+    bool result = (report == report);
+
+    // Assert
+    EXPECT_TRUE(result);
 }

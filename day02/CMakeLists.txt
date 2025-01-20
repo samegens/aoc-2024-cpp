@@ -35,7 +35,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(solver_test ${TEST_SOURCES} ${SHARED_SOURCES})
 
 # Link Google Test libraries to the test executable
-target_link_libraries(solver_test GTest::GTest GTest::Main pthread)
+target_link_libraries(solver_test GTest::GTest GTest::Main pthread gmock gmock_main)
 
 # Enable debug
 set(CMAKE_BUILD_TYPE Debug)
