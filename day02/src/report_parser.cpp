@@ -10,25 +10,25 @@ ReportParser::~ReportParser()
 {
 }
 
-Report ReportParser::Parse(const std::string &text) const
+Report ReportParser::Parse(const std::string &line) const
 {
-    ValidateInput(text);
-    std::vector<int> levels = ParseLevels(text);
+    ValidateInput(line);
+    std::vector<int> levels = ParseLevels(line);
     return Report(levels);
 }
 
-void ReportParser::ValidateInput(const std::string &text) const
+void ReportParser::ValidateInput(const std::string &line) const
 {
-    if (text.empty())
+    if (line.empty())
     {
-        throw std::runtime_error("Input text is empty");
+        throw std::runtime_error("Input line is empty");
     }
 }
 
-std::vector<int> ReportParser::ParseLevels(const std::string &text) const
+std::vector<int> ReportParser::ParseLevels(const std::string &line) const
 {
     std::vector<int> levels;
-    std::istringstream stream(text);
+    std::istringstream stream(line);
 
     int number;
     while (stream >> number)
@@ -38,12 +38,12 @@ std::vector<int> ReportParser::ParseLevels(const std::string &text) const
 
     if (stream.fail() && !stream.eof())
     {
-        throw std::runtime_error("Invalid input format: " + text);
+        throw std::runtime_error("Invalid input format: " + line);
     }
 
     if (levels.size() == 0)
     {
-        throw std::runtime_error("Input text is empty");
+        throw std::runtime_error("Input line is empty");
     }
 
     return levels;
