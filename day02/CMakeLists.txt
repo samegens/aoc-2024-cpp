@@ -14,11 +14,11 @@ set(SHARED_SOURCES
 )
 
 # Test source files
-set(TEST_SOURCES
-    test/report_test.cpp
-    test/report_parser_test.cpp
-    test/report_checker_test.cpp
-    test/solver_test.cpp
+set(UNIT_TEST_SOURCES
+    test/unit/report_test.cpp
+    test/unit/report_parser_test.cpp
+    test/unit/report_checker_test.cpp
+    test/unit/solver_test.cpp
 )
 
 # Add the executable
@@ -32,7 +32,7 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Add the test executable
-add_executable(solver_test ${TEST_SOURCES} ${SHARED_SOURCES})
+add_executable(solver_test ${UNIT_TEST_SOURCES} ${SHARED_SOURCES})
 
 # Link Google Test libraries to the test executable
 target_link_libraries(solver_test GTest::GTest GTest::Main pthread gmock gmock_main)
