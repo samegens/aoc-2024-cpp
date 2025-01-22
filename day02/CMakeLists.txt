@@ -26,11 +26,16 @@ set(INTEGRATION_TEST_SOURCES
     test/integration/solver_test.cpp
 )
 
-# Add the main executable
-add_executable(solver src/main.cpp ${SHARED_SOURCES})
+# End-to-end test source files
+set(END_TO_END_TEST_SOURCES
+    test/end-to-end/solver_test.cpp
+)
 
 # Include directories for headers
 include_directories(include)
+
+# Add the main executable
+add_executable(solver src/main.cpp ${SHARED_SOURCES})
 
 # Add Google Test
 find_package(GTest REQUIRED)
@@ -47,6 +52,12 @@ add_executable(integration_tests ${INTEGRATION_TEST_SOURCES} ${SHARED_SOURCES})
 
 # Link Google Test libraries to the integration test executable
 target_link_libraries(integration_tests GTest::GTest GTest::Main pthread)
+
+# Add the end-to-end test executable
+add_executable(end_to_end_tests ${END_TO_END_TEST_SOURCES} ${SHARED_SOURCES})
+
+# Link Google Test libraries to the end-to-end test executable
+target_link_libraries(end_to_end_tests GTest::GTest GTest::Main pthread)
 
 # Enable debug
 set(CMAKE_BUILD_TYPE Debug)
