@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and Test Day02
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ make googletest
+          cd /usr/src/googletest
+          sudo cmake -Bbuild -H.
+          sudo cmake --build build --target install
+
+      - name: Configure CMake
+        run: |
+          mkdir -p day02/build
+          cd day02/build
+          cmake ..
+
+      - name: Build
+        run: |
+          cd day02/build
+          make
+
+      - name: Run Unit Tests
+        run: |
+          cd day02/build
+          ctest --output-on-failure -R unit_tests
+
+      - name: Run Integration Tests
+        run: |
+          cd day02/build
+          ctest --output-on-failure -R integration_tests
+
+      - name: Run End-to-End Tests
+        run: |
+          cd day02/build
+          ctest --output-on-failure -R end_to_end_tests

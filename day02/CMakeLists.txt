@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(Solver)
 
+# Enable testing
+enable_testing()
+
 # Set the C++ standard to C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -47,17 +50,26 @@ add_executable(unit_tests ${UNIT_TEST_SOURCES} ${SHARED_SOURCES})
 # Link Google Test libraries to the unit test executable
 target_link_libraries(unit_tests GTest::GTest GTest::Main pthread gmock gmock_main)
 
+# Register the unit test executable with CTest
+add_test(NAME unit_tests COMMAND unit_tests)
+
 # Add the integration test executable
 add_executable(integration_tests ${INTEGRATION_TEST_SOURCES} ${SHARED_SOURCES})
 
 # Link Google Test libraries to the integration test executable
 target_link_libraries(integration_tests GTest::GTest GTest::Main pthread)
 
+# Register the integration test executable with CTest
+add_test(NAME integration_tests COMMAND integration_tests)
+
 # Add the end-to-end test executable
 add_executable(end_to_end_tests ${END_TO_END_TEST_SOURCES} ${SHARED_SOURCES})
 
 # Link Google Test libraries to the end-to-end test executable
 target_link_libraries(end_to_end_tests GTest::GTest GTest::Main pthread)
+
+# Register the end-to-end test executable with CTest
+add_test(NAME end_to_end_tests COMMAND end_to_end_tests)
 
 # Enable debug
 set(CMAKE_BUILD_TYPE Debug)
