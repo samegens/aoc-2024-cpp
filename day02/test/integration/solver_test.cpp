@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include "solver.h"
 
-TEST(SolverIntegrationTest, SolvePart1) {
+TEST(SolverIntegrationTest, SolvePart1)
+{
     // Arrange
     std::string input = R"(7 6 4 2 1
 1 2 7 8 9
@@ -20,7 +21,8 @@ TEST(SolverIntegrationTest, SolvePart1) {
     EXPECT_EQ(result, 2);
 }
 
-TEST(SolverIntegrationTest, SolvePart2) {
+TEST(SolverIntegrationTest, SolvePart2)
+{
     // Arrange
     std::string input = R"(7 6 4 2 1
 1 2 7 8 9
