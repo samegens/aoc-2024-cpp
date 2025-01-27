@@ -40,19 +40,18 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
           cd day02/build
-          ctest --output-on-failure -R unit_tests | tee $GITHUB_STEP_SUMMARY
+          ctest --output-on-failure -R unit_tests
 
       - name: Run Integration Tests
         run: |
           cd day02/build
-          ctest --output-on-failure -R integration_tests | tee $GITHUB_STEP_SUMMARY
+          ctest --output-on-failure -R integration_tests
 
       - name: Run End-to-End Tests
         run: |
           cd day02/build
-          ctest --output-on-failure -R end_to_end_tests | tee $GITHUB_STEP_SUMMARY
+          ctest --output-on-failure -R end_to_end_tests
 
       - name: Generate code coverage
         run: |
