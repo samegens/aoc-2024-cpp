@@ -34,7 +34,7 @@ jobs:
       - name: Build
         run: |
           cd day02/build
-          make
+          make clean && make
 
       - name: Run Unit Tests
         run: |
