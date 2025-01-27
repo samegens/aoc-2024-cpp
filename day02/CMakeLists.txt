@@ -71,5 +71,15 @@ target_link_libraries(end_to_end_tests GTest::GTest GTest::Main pthread)
 # Register the end-to-end test executable with CTest
 add_test(NAME end_to_end_tests COMMAND end_to_end_tests)
 
-# Enable debug
-set(CMAKE_BUILD_TYPE Debug)
+# Enable coverage
+set(CMAKE_BUILD_TYPE Coverage)
+
+# Set Make flags for code coverage
+if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
+    message(STATUS "Building with coverage instrumentation")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -O0 -g")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -O0 -g")
+    set(COVERAGE_LINK_FLAGS "--coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${COVERAGE_LINK_FLAGS}")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${COVERAGE_LINK_FLAGS}")
+endif()
