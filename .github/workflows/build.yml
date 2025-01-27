@@ -24,7 +24,8 @@ jobs:
           cd /usr/src/googletest
           sudo cmake -Bbuild -H.
           sudo cmake --build build --target install
-          npm install -g lcov-to-cobertura-xml
+          cd /usr/local/bin
+          wget https://raw.github.com/eriwen/lcov-to-cobertura-xml/master/lcov_cobertura/lcov_cobertura.py
 
       - name: Configure CMake
         run: |
@@ -67,7 +68,7 @@ jobs:
           path: coverage_report
 
       - name: Convert LCOV to Cobertura
-        run: lcov-to-cobertura-xml coverage_filtered.info --output coverage.cobertura.xml
+        run: python /usr/local/bin/lcov_cobertura.py coverage_filtered.info --output coverage.cobertura.xml
 
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
