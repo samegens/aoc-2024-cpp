@@ -11,7 +11,7 @@ on:
 jobs:
   build-and-test:
     name: Build and Test Day02
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout code
@@ -62,7 +62,7 @@ jobs:
           genhtml coverage_filtered.info --output-directory coverage_report
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage_report
